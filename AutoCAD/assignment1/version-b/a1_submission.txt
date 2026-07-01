@@ -8,6 +8,19 @@ This file contains : Figure 11-3c (Version B lengths)  +  Figure 11-4e
 VERSION B = 11-3c leg lengths from YOUR hand-measured values, scaled to feet
             (measured value x 100). This is the complete, self-contained build.
 
+--------------------------------------------------------------------------------
+READY-MADE DRAWING IN THIS FOLDER  (you do NOT have to draw it by hand)
+--------------------------------------------------------------------------------
+  Chandni_Project55_063026_B.dxf  <- the finished drawing (both figures)
+  PREVIEW_B.png                   <- image of it, to eyeball before submitting
+
+  To turn it into a .dwg for submission (10 seconds in AutoCAD 2027):
+    1. Open AutoCAD 2027 > Open... > select Chandni_Project55_063026_B.dxf
+    2. File > Save As > file type "AutoCAD 2018 Drawing (*.dwg)"
+       > keep the name Chandni_Project55_063026_B > Save.
+  (A .dxf is a native AutoCAD interchange file; nothing is lost in the save.)
+  The manual steps below are kept as a full record / in case you want to rebuild.
+
 *** ONE LEG WAS NOT IN YOUR MEASUREMENTS ***
 Your five values (2.31, 2.05, 2.47, 2.38, 3.62) map by size to five of the six
 legs. The long azimuth-256 leg has NO measurement, so it is ESTIMATED at 444'

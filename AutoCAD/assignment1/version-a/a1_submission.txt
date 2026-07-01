@@ -9,6 +9,19 @@ VERSION A = 11-3c leg lengths obtained by measuring the figure (pixel-measured,
             proportional). This is the complete, self-contained build + answers.
 
 --------------------------------------------------------------------------------
+READY-MADE DRAWING IN THIS FOLDER  (you do NOT have to draw it by hand)
+--------------------------------------------------------------------------------
+  Chandni_Project55_063026_A.dxf  <- the finished drawing (both figures)
+  PREVIEW_A.png                   <- image of it, to eyeball before submitting
+
+  To turn it into a .dwg for submission (10 seconds in AutoCAD 2027):
+    1. Open AutoCAD 2027 > Open... > select Chandni_Project55_063026_A.dxf
+    2. File > Save As > file type "AutoCAD 2018 Drawing (*.dwg)"
+       > keep the name Chandni_Project55_063026_A > Save.
+  (A .dxf is a native AutoCAD interchange file; nothing is lost in the save.)
+  The manual steps below are kept as a full record / in case you want to rebuild.
+
+--------------------------------------------------------------------------------
 REQUIRED ANSWERS (the graded "determine" items, Fig 11-4e)
 --------------------------------------------------------------------------------
   * Segment [AB] : Length = 215.48 ft (215'-5 3/4")   Bearing = N 42 E  (az 42)
