@@ -1,0 +1,321 @@
+================================================================================
+AUTOCAD ASSIGNMENT 1 - CLOSED TRAVERSE
+Planning Outline / Strategy Document
+================================================================================
+Course      : AutoCAD for Civil Engineering Applications
+Textbook    : Introduction to AutoCAD 2023 for Civil Engineering Applications
+              (Nighat Yasmin, Ph.D.) - Chapters 11 & 12
+Figures     : 11-3(c) and 11-4(e)
+Drafted     : 2026-06-30
+Status      : PLANNING - no drawing started yet. Key decisions confirmed
+              2026-06-30 (see below); a few items still open.
+================================================================================
+
+
+--------------------------------------------------------------------------------
+DECISIONS CONFIRMED (2026-06-30)
+--------------------------------------------------------------------------------
+  D1. File layout : ONE .dwg containing BOTH traverses (drawn side by side).
+  D2. Units       : UNITS command ->
+                      Length Type   = Engineering (feet + decimal inches)
+                      Angle  Type   = Decimal Degrees, precision = 0 (whole deg)
+                      Insertion scale = Feet
+                      Direction Control: Base Angle = North (90)
+                    *** IMPORTANT: also tick the "Clockwise" checkbox in the main
+                        UNITS dialog. Azimuths run clockwise from North, so with
+                        North base + Clockwise ON you can type legs directly as
+                        @<length><<azimuth> (e.g. @245<129). If Clockwise is left
+                        OFF (default CCW), the same entry points the wrong way and
+                        you'd have to enter (360 - azimuth) instead. ***
+  D3. Fig 11-3c lengths : figure shows NO lengths (only azimuths) -> lengths are
+                    MEASURED from the figure. (See re-opened Q3 for the method.)
+  D4. North arrows : one N-arrow block inserted at EVERY vertex, matching the
+                    figures (layer NORTH-ARROWS).
+  D5. Fig 11-3c dims : AZIMUTH (angular) dimensions ONLY, to match the figure
+                    (no linear leg dimensions on 11-3c).
+  D6. Filenames    : TWO deliverable files (Q8 resolved), each a COMPLETE
+                    assignment = one 11-3c version + a copy of 11-4e:
+                      Chandni_Project55_063026_A.dwg  (11-3c Version A + 11-4e)
+                      Chandni_Project55_063026_B.dwg  (11-3c Version B + 11-4e)
+                    (LastName=Chandni, Project=Project55, Date=06/30/26 MMDDYY.)
+  D7. Software     : AutoCAD 2027 on a remote desktop. All steps version-agnostic.
+  D8. Fig 11-3c    : produce TWO length versions (see Section 8):
+                    Version A = pixel-measured proportional lengths (my measure);
+                    Version B = your hand-measured values scaled to feet.
+  D9. Delivery     : NO scripts. An EXTREMELY DETAILED step-by-step manual guide
+                    that you follow while entering everything by hand in AutoCAD.
+                    -> see companion file: autocad-guide.txt
+  D10.*** UNITS GOTCHA (Engineering) : with Engineering length units, 1 drawing
+                    unit = 1 INCH. So EVERY length must be typed WITH a foot mark:
+                       @245'<129   (correct = 245 feet)
+                       @245<129    (WRONG = 245 inches = 20.4 ft)
+                    And the AREA command reports SQUARE INCHES -> divide by 144
+                    to get square feet for the area text. ***
+================================================================================
+
+
+--------------------------------------------------------------------------------
+0. SOURCE MATERIAL - WHAT WE HAVE / WHAT IS MISSING
+--------------------------------------------------------------------------------
+HAVE:
+  - close-traverse-assignment.txt ... assignment instructions (text)
+  - instructions-assignment.png ..... same instructions (image, confirmed match)
+  - figure11-3c.png ................. Figure 11-3(c) - directions only
+  - figure11-4e.png ................. Figure 11-4(e) - directions + lengths
+  - intro-to-autocad-...-2023.pdf ... ONLY Chapter 12 "Contours" (pp. 499-510)
+
+MISSING / GAP:
+  - Chapter 11 (the actual closed-traverse / azimuth chapter, approx pp. 477-498)
+    is NOT in the provided PDF. The assignment references "pp. 495-505"; of that
+    range only 499-505 (Chapter 12) is available. Pages 495-498 (end of Ch. 11,
+    the traverse method itself) are not included.
+  - Consequence: the step-by-step azimuth-drawing procedure cannot be quoted from
+    the book. We will use the standard AutoCAD surveying workflow instead and lean
+    on Chapter 12 for the items it DOES cover (layers, North-arrow block, text).
+
+USEFUL ITEMS FOUND IN CHAPTER 12 (still relevant to this assignment):
+  - 12.5.2 Layers: create separate, purpose-named layers.
+  - 12.5.7 North arrow: insert from DesignCenter > Landscaping.dwg > "North Arrow"
+           block, scaled appropriately.
+  - Text command (Home > Annotate) for labels.
+  - Polyline command for closed lines (needed for the area calculation in Part 4).
+
+
+--------------------------------------------------------------------------------
+1. WHAT THE ASSIGNMENT IS ASKING (restated, mapped to instruction numbers)
+--------------------------------------------------------------------------------
+  (1) Set drawing units to feet-inches.
+  (2) Draw the closed traverse of Figure 11-3(c).
+        - lengths are NOT given -> measure each leg from the figure, then scale.
+        (2a) Create appropriate layers.
+        (2b) Add dimensions + northing arrows as shown.
+  (3) Draw the closed traverse of Figure 11-4(e).
+        (3a) Create appropriate layers.
+        (3b) Add dimensions + northing arrows as shown.
+        (3c) Determine and label the LENGTH and BEARING of segment [AB].
+  (4) Determine the AREA of the closed figure from Part 3 (Fig 11-4e) and place a
+      TEXT object inside the figure showing the area in square feet.
+  (5) Save as:  LastName_ProjectNumber_Date.dwg
+
+
+--------------------------------------------------------------------------------
+2. HOW TO READ THE FIGURES (interpretation)
+--------------------------------------------------------------------------------
+Both figures use the AZIMUTH (whole-circle bearing) convention:
+  - Every station (vertex) has a North arrow (blue "N").
+  - The magenta angle at a station is the azimuth of the leg LEAVING that station,
+    measured CLOCKWISE from North (0 deg = North, 90 = East, 180 = South, 270 = W).
+  - Lengths (when shown) are in feet, labeled in dark red (e.g., 500').
+
+FIGURE 11-3(c)  - 6 legs, closed (Start and End are the same point on the left).
+  Azimuths given (no lengths):  34, 72, 126, 102, 256, 286  (degrees)
+  -> Lengths must be measured off the figure and the drawing scaled (see Part A).
+
+FIGURE 11-4(e)  - 14 legs, closed. 13 legs have BOTH length + azimuth; the 14th
+  leg [AB] is the unknown closing line whose length+bearing we must DETERMINE.
+  - Points A and B are adjacent vertices near the bottom-center.
+  - Note on figure: "Draw this line first" -> arrow points at the A->245' leg
+    (azimuth 129). Meaning: start the chain at A, draw all 13 known legs around the
+    loop until you arrive at B; the gap from B back to A is segment [AB].
+
+  Recorded values (lengths and azimuths read from the figure; exact leg-by-leg
+  pairing to be re-verified vertex-by-vertex during drawing):
+      Lengths (ft): 245, 297, 293, 249, 300, 265, 500, 240, 281, 302, 287, 270, 190
+      Azimuths(deg): 129, 55, 23, 346, 300, 260, 275, 243, 156, 216, 131, 84, 110
+      Unknown leg : [AB]  (length + bearing = output of Part 3c)
+
+  CONFIRMED traverse order (pixel-validated: each leg's drawn direction matches
+  its given azimuth to within a few degrees). Start at A, enter in this order:
+      #   from-> to     length  azimuth   (PLINE entry, Engineering units)
+      1   A  -> S1        245'    129      @245'<129   <- "draw this line first"
+      2   S1 -> S2        297'     55      @297'<55
+      3   S2 -> S3        293'     23      @293'<23
+      4   S3 -> S4        249'    346      @249'<346
+      5   S4 -> S5        300'    300      @300'<300
+      6   S5 -> S6        265'    260      @265'<260
+      7   S6 -> S7        500'    275      @500'<275
+      8   S7 -> S8        240'    243      @240'<243
+      9   S8 -> S9        281'    156      @281'<156
+      10  S9 -> S10       302'    216      @302'<216
+      11  S10-> S11       287'    131      @287'<131
+      12  S11-> S12       270'     84      @270'<84
+      13  S12-> B         190'    110      @190'<110
+      14  B  -> A        [AB]   unknown    type  C  (Close) -> draws AB
+
+  COMPUTED RESULTS (from the 13 given legs; use to verify your AutoCAD output):
+    - Segment AB (closing line B->A):
+        Length  ~= 215.48 ft  (approx 215'-5 3/4")
+        Azimuth ~= 42.06 deg  ->  bearing  N 42 E   (B->A)
+        (reverse A->B = 222.06 deg = S 42 W)
+    - Enclosed area ~= 877,207 sq ft  (~20.14 acres)
+        In AutoCAD (Engineering) the AREA command shows this x144 in sq INCHES
+        (~126,317,900) -> divide by 144 to get 877,207 sq ft for the text label.
+    These are the expected answers; your drawn values should land within rounding.
+
+
+--------------------------------------------------------------------------------
+3. AUTOCAD STRATEGY / WORKFLOW
+--------------------------------------------------------------------------------
+A. UNITS (instruction 1) - CONFIRMED CONFIG (see D2)
+   - UNITS command:
+       Length Type   = Engineering (feet + decimal inches -> satisfies "feet-inches")
+       Angle  Type   = Decimal Degrees, precision = 0 (whole degrees, matches figs)
+       Insertion scale = Feet
+       Direction Control > Base Angle = North (90)
+       Clockwise checkbox = ON  (REQUIRED for azimuths - see note in D2)
+   - With that config, draw each leg as relative polar:  @<length><<azimuth>
+       e.g.  @245<129  draws 245 ft at azimuth 129 deg.
+   - Sanity check after setup: type @100<90 -> the segment must point EAST. If it
+     points elsewhere, the Clockwise/Base-angle settings are off.
+
+B. LAYERS (instructions 2a, 3a) - proposed layer scheme (LAYER command):
+       TRAVERSE      - the traverse line/polyline      (white/black, continuous)
+       NORTH-ARROWS  - the N arrow blocks              (blue)
+       DIM-LINEAR    - length dimensions               (red)
+       DIM-ANGULAR   - azimuth/angle dimensions         (magenta)
+       TEXT          - labels (AB, area, station IDs)  (green)
+       (optional) BORDER/TITLE for sheet border + title block.
+
+C. DRAW FIGURE 11-3(c)  (PART A of the work)
+   1. Lengths are not given: measure each of the 6 legs from the figure
+      (see OPEN QUESTION on measurement source), record approximate lengths.
+   2. On layer TRAVERSE, draw the 6 legs using the given azimuths + measured
+      lengths, starting at the Start/End point, closing back to it.
+   3. SCALE the closed figure to a convenient real-world size (SCALE command),
+      keeping proportions - per "scale the drawing from those dimensions."
+   4. Add North-arrow blocks at each station (layer NORTH-ARROWS).
+   5. Dimension as shown: angular dims for the 6 azimuths (layer DIM-ANGULAR);
+      add linear leg dimensions too if required (see OPEN QUESTION).
+
+D. DRAW FIGURE 11-4(e)  (PART B of the work)
+   1. On layer TRAVERSE, start at A and draw the 13 known legs in order using
+      method A(i):  @245<129 , @297<55 , @293<23 , ... , @190<110 , ending at B.
+   2. Close the loop: draw line B -> A. This is segment [AB].
+      - Best practice: draw the 13 legs as a single POLYLINE so the figure is one
+        closed object (needed for clean area in Part 4); close it B->A with PLINE
+        "Close" or by snapping the last vertex to A.
+   3. Determine [AB] length + bearing (instruction 3c):
+        - Select the AB segment and read length+angle from Properties / LIST /
+          DIST / MEASUREGEOM. With North-base+Clockwise units, the reported angle
+          is the azimuth; convert to bearing (N/S__E/W) for labeling if required.
+        - Label it on/near AB on layer TEXT, e.g.  "AB = 372'-6", N57d E"  (example).
+   4. North-arrow blocks at each station (layer NORTH-ARROWS).
+   5. Dimensions as shown: linear dims for the 13 known lengths (DIM-LINEAR) and
+      angular dims for the azimuths (DIM-ANGULAR).
+
+E. AREA + TEXT (instruction 4)
+   - Ensure the Fig 11-4(e) figure is a single CLOSED polyline (join legs + AB if
+     they were drawn as separate lines: PEDIT > Join, or BOUNDARY).
+   - Get area:  AREA command (Object option) or Properties palette "Area" field,
+     or MEASUREGEOM. Result is in square feet (sq in if architectural - convert:
+     1 sq ft = 144 sq in; confirm units of the reported value).
+   - Place an MTEXT/DTEXT object INSIDE the closed figure on layer TEXT, e.g.
+       "Area = 461,250 SQ FT"  (value filled in after measuring).
+
+F. SAVE (instruction 5)
+   - Filename:  LastName_ProjectNumber_Date.dwg
+   - Need: last name, project number, and date format (see OPEN QUESTIONS).
+   - Proposed default (confirm): <LastName>_Project1_2026-06-30.dwg
+
+
+--------------------------------------------------------------------------------
+4. KEY CONCEPTS / FORMULAS (reference)
+--------------------------------------------------------------------------------
+  - Azimuth (whole-circle bearing): angle 0-360 clockwise from North.
+  - Quadrant bearing: N/S <angle> E/W. Conversions from azimuth (Az):
+        NE quad (0-90)     : bearing = N (Az) E
+        SE quad (90-180)   : bearing = S (180-Az) E
+        SW quad (180-270)  : bearing = S (Az-180) W
+        NW quad (270-360)  : bearing = N (360-Az) W
+  - Closed traverse: the legs return to the start; for Fig 11-4(e) the single
+    unknown leg AB is found graphically by closing the figure in AutoCAD.
+  - Area of a closed polyline read directly from AutoCAD (no manual coordinate
+    method needed, though it can be cross-checked).
+
+
+--------------------------------------------------------------------------------
+5. ASSUMPTIONS (working defaults - correct me if wrong)
+--------------------------------------------------------------------------------
+  - Magenta angles are azimuths (clockwise from North), not interior/deflection
+    angles. (Consistent across both figures and with the North arrows.)
+  - Lengths are in whole feet; units = Engineering (feet + decimal inches) per D2.
+  - Fig 11-4(e) has exactly one unknown leg (AB); all others are given.
+  - Both figures live in ONE drawing file (D1).
+  - The deliverable for me here is the PLAN + this outline; the actual AutoCAD
+    drafting is done by you on the AutoCAD machine, using this as the script.
+
+
+--------------------------------------------------------------------------------
+6. OPEN QUESTIONS (need answers before/while executing)
+--------------------------------------------------------------------------------
+  [ALL RESOLVED]
+  Q1. File org -> now D6: TWO files, each = one 11-3c version + a copy of 11-4e.
+  Q2. Azimuth entry -> D2/D10: Engineering length (foot-mark!) / Decimal-deg angle
+      / North base + Clockwise; enter legs as @len'<az.
+  Q3. 11-3c lengths -> D8/Section 8: Version A (my pixels) + Version B (your data).
+  Q4. North arrows -> D4: N-block at every vertex.
+  Q5. 11-3c dimensions -> D5: azimuth (angular) dimensions only.
+  Q6. Filename -> D6: Chandni_Project55_063026_A/_B.dwg.
+  Q7. Software -> D7: AutoCAD 2027 (no special template noted).
+  Q8. Delivery -> D9: extremely detailed manual guide (autocad-guide.txt).
+
+  ONE small item to confirm when convenient (not blocking):
+  - Version B is missing the 6th leg (azimuth-256 leg). Re-measure it, or use
+    Version A's proportion (~444'). Version A is complete and can be used as-is.
+
+
+--------------------------------------------------------------------------------
+8. FIGURE 11-3(c) LENGTH DATA (two versions, per D8)
+--------------------------------------------------------------------------------
+Station pixel coords read from figure11-3c.png (x right, y down):
+  Start=(105,263)  P72=(173,152)  P126=(297,118)
+  P102=(407,205)   P256=(540,233) P286=(290,298)
+Cross-check: leg directions implied by these pixels match the GIVEN azimuths to
+within 1-5 deg on all six legs -> proportions are trustworthy.
+
+Traverse order + azimuths (outgoing leg at each station):
+  Leg  From -> To      Azimuth   px-len   VerA (ft)   VerB (ft, your data)
+  1    Start-> P72       34       130.2      260          231   (2.31')
+  2    P72  -> P126      72       128.6      257          205   (2.05')
+  3    P126 -> P102     126       140.2      280          247   (2.47')
+  4    P102 -> P256     102       135.9      272          238   (2.38')
+  5    P256 -> P286     256       258.3      517       >> MISSING <<  (est ~444)
+  6    P286 -> Start    286       188.3      377          362   (3.62')
+
+VERSION A (mine): pixel length x 2.0 ft/px, rounded to whole feet. Complete,
+  self-consistent, azimuth-validated. Ready to type in as-is.
+
+VERSION B (yours): the five values you gave (2.31/2.05/2.47/2.38/3.62) x100 ->
+  feet. They map by magnitude to 5 of the 6 legs as shown. The 6th leg -- the
+  long lower-right leg (P256->P286, azimuth 256) -- has NO value in your set.
+  Using the consistent scale from your other four small legs, that leg would be
+  ~4.44' -> ~444'. ACTION: either remeasure that one leg, or borrow Version A's
+  proportion. (Note: your 3.62' fits the P286->Start leg better than the 256 leg,
+  which is why the 256 leg is the one flagged missing -- confirm your measuring
+  order if this looks off.)
+
+Entry (Engineering units -> foot marks!): on layer TRAVERSE, LINE from a start
+  point, then per leg:  @260'<34  @257'<72  @280'<126  @272'<102  @517'<256  then
+  type  C  (Close) for the last leg back to Start.
+
+CLOSURE NOTE: because lengths are eyeballed and azimuths are whole degrees, the
+  six legs do NOT close perfectly. Version A misclosure computes to ~55.8 ft over
+  a ~1963 ft perimeter (about 1:35) - normal for a "measure from the figure"
+  exercise. Draw legs 1-5 with @len'<az then type C to Close (the 6th leg auto-
+  closes and absorbs the gap), OR draw all 6 and leave the small visible gap.
+
+
+--------------------------------------------------------------------------------
+7. EXECUTION CHECKLIST (to run on the AutoCAD machine, after sign-off)
+--------------------------------------------------------------------------------
+  [ ] Set UNITS (Architectural; North-base + Clockwise for angles)
+  [ ] Create layers (TRAVERSE / NORTH-ARROWS / DIM-LINEAR / DIM-ANGULAR / TEXT)
+  [ ] Fig 11-3c: measure legs -> draw 6 legs -> close -> scale
+  [ ] Fig 11-3c: north arrows + dimensions
+  [ ] Fig 11-4e: draw 13 known legs from A (polyline) -> close B->A (AB)
+  [ ] Fig 11-4e: north arrows + dimensions
+  [ ] Determine + label AB length & bearing
+  [ ] Compute area of 11-4e + place area text (sq ft) inside the figure
+  [ ] Save as LastName_ProjectNumber_Date.dwg
+  [ ] Final review against both figures
+================================================================================

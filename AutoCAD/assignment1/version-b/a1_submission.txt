@@ -1,0 +1,138 @@
+================================================================================
+ASSIGNMENT 1 - CLOSED TRAVERSE  |  SUBMISSION - VERSION B
+================================================================================
+Student : Chandni            Project : 55            Date : 06/30/26
+Course  : AutoCAD 2027 for Civil Engineering Applications
+Save the finished drawing as :  Chandni_Project55_063026_B.dwg
+This file contains : Figure 11-3c (Version B lengths)  +  Figure 11-4e
+VERSION B = 11-3c leg lengths from YOUR hand-measured values, scaled to feet
+            (measured value x 100). This is the complete, self-contained build.
+
+*** ONE LEG WAS NOT IN YOUR MEASUREMENTS ***
+Your five values (2.31, 2.05, 2.47, 2.38, 3.62) map by size to five of the six
+legs. The long azimuth-256 leg has NO measurement, so it is ESTIMATED at 444'
+(proportional to your other legs). Re-measure that leg on the printed figure and
+replace 444' with (your inches x 100)' if you can. See the table in STEP 3.
+
+--------------------------------------------------------------------------------
+REQUIRED ANSWERS (the graded "determine" items, Fig 11-4e - same in both versions)
+--------------------------------------------------------------------------------
+  * Segment [AB] : Length = 215.48 ft (215'-5 3/4")   Bearing = N 42 E  (az 42)
+  * Area of the closed traverse = 877,207 sq ft  (approx 20.14 acres)
+    (AutoCAD AREA reports square INCHES ~= 126,317,900; divide by 144.)
+
+================================================================================
+CRITICAL UNIT RULE (Engineering units: 1 drawing unit = 1 INCH)
+================================================================================
+Type the FOOT MARK on every length ->  @245'<129   (245 FEET, correct)
+Without the ' you get 245 inches (20 ft) and the drawing is wrong.
+
+================================================================================
+STEP 1 - DRAWING SETUP  (type commands, finish each with ENTER)
+================================================================================
+UNITS:
+  - Length : Type = Engineering ; Precision = 0'-0.00"
+  - Angle  : Type = Decimal Degrees ; Precision = 0 ; TICK "Clockwise"
+  - Insertion scale = Feet
+  - "Direction..." button > Base Angle = North (shows "North 90") > OK > OK
+SANITY CHECK: LINE, click, @100'<90, ESC -> segment must point due EAST. Erase it.
+
+LAYERS (LAYER command -> New):
+  TRAVERSE = white/black | NORTH = blue | DIM-ANG = magenta |
+  DIM-LIN = red | TEXT = green
+
+NORTH-ARROW BLOCK (build once on layer 0, base point at the bottom):
+  - LINE 0,0 to @0,300'   (300-ft north line)
+  - PLINE from top end, Width 20'->0, up ~60'  (filled arrowhead)
+  - CIRCLE center 0,400' radius 70' ; TEXT (Middle) at center height 90' -> "N"
+  - Select all -> BLOCK, name = NARROW, base point = bottom of line (0,0)
+
+================================================================================
+STEP 2 - FIGURE 11-4e  (identical in both versions)
+================================================================================
+Layer = TRAVERSE. Press F12 to turn OFF Dynamic Input. Object Snap (F3) ON.
+Type: PLINE, click start point = A (leave room all around), then enter in order:
+      @245'<129     <- "draw this line first"
+      @297'<55
+      @293'<23
+      @249'<346
+      @300'<300
+      @265'<260
+      @500'<275
+      @240'<243
+      @281'<156
+      @302'<216
+      @287'<131
+      @270'<84
+      @190'<110
+Then type  C  (Close) -> auto-draws closing line B->A = segment [AB].
+ZOOM > Extents. Should match Figure 11-4e. (If scrambled, a foot mark was dropped.)
+Label A and B: TEXT height 120' at the start vertex (A) and the pre-close vertex (B).
+
+DETERMINE AB: DIST > snap B then A -> Distance ~215'-5.76", Angle ~42.
+  Label near AB (layer TEXT, height 120'):   AB = 215'-6"  (N42 E)
+
+AREA + TEXT: AREA > O (Object) > pick the polyline -> read sq inches -> /144.
+  Layer TEXT, MTEXT inside the figure, height 200':   AREA = 877,207 SQ FT
+
+NORTH ARROWS: layer NORTH. INSERT/COPY the NARROW block on all 14 vertices,
+  rotation 0 (straight up). Base point snapped to each vertex.
+
+DIMENSIONS (layer DIM-LIN / DIM-ANG):
+  First: D (Dim Style) > Fit > "Use overall scale of" = 1500 (adjust to taste).
+  - LINEAR: DIMALIGNED on each of the 13 legs + AB (endpoint to endpoint).
+  - ANGULAR (azimuths): DIMANGULAR, press Enter for vertex mode, pick station,
+    pick a point straight UP (north, ORTHO on), pick a point along the outgoing
+    leg. Values by station: 129,55,23,346,300,260,275,243,156,216,131,84,110.
+    For reflex azimuths (>180) drag the arc outside to show the big value, or place
+    a TEXT number instead.
+
+================================================================================
+STEP 3 - FIGURE 11-3c  (VERSION B lengths)
+================================================================================
+Layer = TRAVERSE. Start point well clear of 11-4e (a few thousand ft away) = the
+"Start/End" station. F12 (Dynamic Input) OFF.
+Type: PLINE, click Start, then enter (VERSION B lengths + given azimuths):
+      @231'<34
+      @205'<72
+      @247'<126
+      @238'<102
+      @444'<256      <- ESTIMATED leg (your data was missing this one)
+Then type  C  (Close) -> the 6th leg (~362') auto-closes.
+NOTE: eyeballed lengths -> small misclosure; Close absorbs it (expected/OK).
+Label "Start" and "End" (TEXT height 120') at the start vertex.
+
+11-3c ANNOTATIONS:
+  - NORTH arrows (layer NORTH): NARROW block on all 6 vertices, straight up.
+  - AZIMUTH dimensions ONLY (no linear dims - matches the figure), layer DIM-ANG,
+    DIMANGULAR vertex method at each station: 34,72,126,102,256,286.
+    (256 & 286 are reflex >180 - drag arc outside or label as text.)
+
+11-3c VERSION B LENGTH TABLE (from your measurements x100):
+  Leg  From->To      Azimuth   Length     Your value
+  1    Start->P72      34       231'       (2.31')
+  2    P72  ->P126     72       205'       (2.05')
+  3    P126 ->P102    126       247'       (2.47')
+  4    P102 ->P256    102       238'       (2.38')
+  5    P256 ->P286    256       444'  ***  ESTIMATE - remeasure this leg
+  6    P286 ->Start   286       362'       (3.62', drawn by Close)
+
+================================================================================
+STEP 4 - SAVE
+================================================================================
+ZOOM > Extents; compare against both figures.
+SAVEAS > type "AutoCAD 2018 Drawing (*.dwg)" > name:  Chandni_Project55_063026_B
+Confirm the file contains BOTH figures (11-3c Version B + 11-4e).
+
+================================================================================
+FINAL CHECK
+================================================================================
+  [ ] Units Engineering / Decimal-deg / Clockwise / North base
+  [ ] 5 layers used correctly
+  [ ] 11-4e closed, AB labeled (215'-6", N42 E), area text (877,207 SQ FT)
+  [ ] 11-4e north arrows x14, linear dims x14, azimuth dims x13
+  [ ] 11-3c (Version B) closed, Start/End labeled
+  [ ] 11-3c north arrows x6, azimuth dims x6 (no linear dims)
+  [ ] Leg-5 (444') either remeasured or knowingly left as estimate
+  [ ] Saved as Chandni_Project55_063026_B.dwg
+================================================================================

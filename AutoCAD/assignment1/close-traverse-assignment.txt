@@ -1,0 +1,39 @@
+Prompt: 
+Below, Im outlining my assignment 1 Instructions for my AutoCAD class (as provided from professor, must use autocad software located on different device. We can do all work in this project repo then ill put it into the AutoCad Software)
+Im going to provide the Instructions text as well as a png image showing the same content (instruction-assignment.png)
+Use the following supporting docs for the assignment:
+1. Figure 11-3c (figure11-3c.png) 
+2. Figure 11-3c (figure11-4e.png)
+3. Textbook: (mainly focused on page 495-505)
+    -   Intro to AutoCAD 2023 for Civil Engineering Applications
+        Use the Assigned Textbook as a reference (more than outside sources). The entire textbook is contained in the pdf file (intro-to-autocad-2023-for-civil-engineering-applications.pdf)
+   Author: 
+    -   Nighat Yasmin Ph.D.
+
+The assignment will mainly used content from chapter 11 and 12 of the textbook 
+(I was only able to download chapter 12, so chapter 11 is missing)
+
+First familiarize yourself with my assignment and outline the strategy that will be to ensure its completed correctly.
+Ask me questions for clarification on any areas that may be unclear. Dont actually start the project yet, just report back to me. (No edits unless confirmation is given)
+
+_______________________________________________________________________
+
+AutoCAD: Closed Traverse Assignment Instructions
+
+Set the drawing units to feet-inches.
+Draw the closed traverse shown in Figure 11-3(c) of the textbook.
+Measure the lengths of each section, then scale the drawing using those dimensions.
+Create appropriate layers.
+Add dimensions and northing arrows as shown in the figure.
+Draw the closed traverse shown in Figure 11-4(e) of the textbook.
+Create appropriate layers.
+Add dimensions and northing arrows as shown in the figure.
+Determine and label the length and bearing of the section marked [AB].
+Determine the area of the closed line drawn in Part 3 (Figure 11-4(e)).
+Place a text object inside the closed line showing the calculated area in square feet.
+
+Save the drawing using the following filename format:
+
+LastName_ProjectNumber_Date.dwg
+"Chandni_11_06302026.dwg"
+

@@ -1,0 +1,274 @@
+================================================================================
+AUTOCAD 2027 - STEP-BY-STEP GUIDE
+Closed Traverse Assignment (Figures 11-3c and 11-4e)
+Companion to outline.txt  |  For: Chandni  |  Project 55  |  06/30/26
+================================================================================
+Read this top to bottom. Do it on the remote-desktop AutoCAD 2027 machine.
+Command names are typed at the keyboard and finished with ENTER (shown as [Enter]).
+Right-click = Enter in most contexts. ESC cancels a command.
+
+*** THE #1 RULE (Engineering units): 1 drawing unit = 1 INCH.
+    ALWAYS type the foot mark on lengths ->  @245'<129   (245 FEET)
+    If you forget the ' you get 245 INCHES (20 ft). Everything will be tiny/wrong.
+    The AREA command will report SQUARE INCHES -> divide by 144 for square feet. ***
+
+DELIVERABLE (two files, each a full assignment):
+    Chandni_Project55_063026_A.dwg   = 11-3c Version A  +  11-4e
+    Chandni_Project55_063026_B.dwg   = 11-3c Version B  +  11-4e
+WORKFLOW: build 11-4e once, build 11-3c Version A, Save As _A. Then erase only the
+    11-3c(Version A) part, draw 11-3c Version B in its place, Save As _B.
+
+
+================================================================================
+PART 0 - NEW DRAWING, UNITS, LAYERS, NORTH-ARROW BLOCK  (do once)
+================================================================================
+
+0.1  NEW DRAWING
+  - Application menu > New (or type: NEW [Enter]). Pick the "acad.dwt" template
+    (imperial). You now have a blank Model space.
+
+0.2  DRAWING UNITS   (type: UNITS [Enter]  -> "Drawing Units" dialog)
+  - Length     : Type = Engineering ;  Precision = 0'-0.00"
+  - Angle      : Type = Decimal Degrees ; Precision = 0
+  - Angle      : TICK the "Clockwise" checkbox   <-- REQUIRED for azimuths
+  - "Insertion scale / Units to scale inserted content" = Feet
+  - Click the "Direction..." button:
+        Base Angle = North    (it shows "North  90")   -> OK
+  - OK to close the dialog.
+
+0.3  VERIFY THE ANGLE SETUP (10-second sanity check)
+  - Type: LINE [Enter], click any point, then type  @100'<90  [Enter], ESC.
+  - The segment MUST point to the RIGHT (due EAST). If it points up or elsewhere,
+    your Clockwise/North settings are wrong - redo 0.2. Then ERASE that test line.
+
+0.4  LAYERS   (type: LAYER [Enter]  -> Layer Properties Manager; New = Alt+N or the
+     star icon). Create these, set colors by clicking the color swatch:
+        Name        Color
+        TRAVERSE    White (or Black)
+        NORTH       Blue
+        DIM-ANG     Magenta
+        DIM-LIN     Red
+        TEXT        Green
+  - Close the manager. (Set a layer "current" from the Home > Layers dropdown.)
+
+0.5  MAKE A NORTH-ARROW BLOCK (one simple block, reused at every vertex)
+  Draw it near the origin, on layer 0 so it takes on each insertion layer:
+  - Set current layer = 0.
+  - LINE [Enter]  from  0,0  to  @0,300'   [Enter][Enter]      (a 300-ft north line)
+    (300 ft tall reads well against a ~1400-ft-wide figure; adjust later if needed.)
+  - Add an arrowhead: type PLINE [Enter], click the top end (use Endpoint osnap),
+    then Width [Enter], start width 20' [Enter], end width 0 [Enter], then click a
+    point ~60' higher (straight up with ORTHO/F8 on). [Enter]. (A filled triangle.)
+  - CIRCLE [Enter], center a bit above the arrow (e.g. 0,400'), radius 70' [Enter].
+  - TEXT [Enter], Justify > Middle, pick the circle center, height 90' [Enter],
+    rotation 0 [Enter], type  N  [Enter][Enter].
+  - Select ALL those objects (line+arrow+circle+N).
+  - BLOCK [Enter] (Create Block dialog): Name = NARROW ; Base point = PICK the
+    BOTTOM end of the line (0,0 - the point that will sit on each station);
+    "Convert to block"; OK.
+  (Alternative per textbook Ch.12: Ctrl+2 DesignCenter > Landscaping.dwg > Blocks >
+   "North Arrow", drag in and scale. Use the custom block above if that file
+   isn't present.)
+
+
+================================================================================
+PART 1 - DRAW FIGURE 11-4e (the traverse shared by both files)
+================================================================================
+Draw 11-4e first because it's identical in both deliverables. Start point A can be
+anywhere with room; these instructions assume you click A near the LOWER-MIDDLE of
+your screen with lots of space up and to the sides.
+
+1.1  Current layer = TRAVERSE.
+1.2  Turn OFF Dynamic Input for clean relative-polar typing: press F12 (toggle).
+     Turn ON Object Snap (F3) with Endpoint enabled.
+
+1.3  Draw the 13 known legs + the closing line as ONE closed polyline:
+     Type: PLINE [Enter]
+       - "Specify start point:"  click a point (this is A). Note "draw this line
+         first" in the figure = this very first A->245' leg, so we start here.
+       - Now type each of these in order, pressing [Enter] after each:
+             @245'<129
+             @297'<55
+             @293'<23
+             @249'<346
+             @300'<300
+             @265'<260
+             @500'<275
+             @240'<243
+             @281'<156
+             @302'<216
+             @287'<131
+             @270'<84
+             @190'<110
+       - You are now at point B. Type:  C   [Enter]   (Close)
+         -> this draws the CLOSING line B->A, which IS segment [AB].
+     Type: ZOOM [Enter] then E [Enter] (Extents) to see the whole figure.
+     It should look like Figure 11-4e. If it looks scrambled, you likely dropped a
+     foot mark (') on a leg - UNDO (Ctrl+Z) and re-enter.
+
+1.4  LABEL points A and B: TEXT [Enter], height 120', click just outside the start
+     vertex, type A [Enter][Enter]; repeat for B at the closing vertex.
+     (A = PLINE start point; B = the vertex just before the Close segment.)
+
+
+================================================================================
+PART 2 - DETERMINE LENGTH + BEARING OF SEGMENT [AB]   (instruction 3c)
+================================================================================
+2.1  Measure it: type DIST [Enter] (or DI).
+       - "First point:"  snap the ENDPOINT at B.
+       - "Second point:" snap the ENDPOINT at A.
+     Read the command line:
+       Distance = 215'-5.76"  (approx)      <- length of AB
+       Angle in XY plane = 42               <- azimuth of B->A (N 42 E)
+     EXPECTED (from the given data): length ~= 215.48 ft ; azimuth ~= 42 deg.
+     If AutoCAD reports ~222 deg that is the A->B direction (S 42 W) - same line.
+
+2.2  LABEL it on layer TEXT near the AB line: MTEXT [Enter], drag a small box beside
+     AB, height 120', type:
+         AB = 215'-6"  (N42 E)
+     (Use YOUR measured values from 2.1 if they differ slightly.)
+
+
+================================================================================
+PART 3 - AREA OF 11-4e + AREA TEXT INSIDE   (instruction 4)
+================================================================================
+3.1  Get the area of the closed polyline:
+       Type: AREA [Enter] > type O [Enter] (Object) > click the traverse polyline.
+       Command line shows:  Area = <big number>   (this is SQUARE INCHES).
+     (Or: select the polyline, open Properties (Ctrl+1), read Geometry > Area.)
+3.2  CONVERT to square feet:  square feet = (square inches) / 144.
+     EXPECTED ~= 877,207 sq ft  (the raw sq-inch value is ~126,317,900).
+3.3  Set current layer = TEXT. MTEXT [Enter], draw a box INSIDE the figure (open
+     middle area), height 200', type:
+         AREA = 877,207 SQ FT
+     (Use YOUR computed sq-ft value. Comma optional.)
+
+
+================================================================================
+PART 4 - NORTH ARROWS ON 11-4e   (one at every vertex; instruction 3b)
+================================================================================
+11-4e has 14 vertices (A, B, and 12 more). Put a NARROW block on each.
+4.1  Current layer = NORTH.
+4.2  Type: INSERT [Enter] (Blocks palette) > choose NARROW > Scale 1 > Rotation 0 >
+     click to place. Use Endpoint/Node osnap to land the block's base exactly on a
+     vertex. Repeat for all 14 vertices (or place once, then COPY to each vertex
+     using Endpoint osnaps).
+     TIP: all north arrows point straight UP (rotation 0) - do NOT rotate them.
+
+
+================================================================================
+PART 5 - DIMENSIONS ON 11-4e   (lengths + azimuths, "as shown"; instruction 3b)
+================================================================================
+Annotations are tiny by default at this scale. FIRST set sizes:
+5.0  Type: D [Enter] (Dimension Style Manager) > Modify > Fit tab >
+        "Use overall scale of" = 1500 (start here) > OK > Close.
+     Also set text: same dialog > Text tab > Text height = 0.18 (it multiplies by
+     the 1500 overall scale -> ~270" tall). Adjust the 1500 up/down until dims look
+     right after you place the first one.
+
+5.1  LINEAR (leg lengths) - layer DIM-LIN. For EACH of the 13 legs:
+        Type: DIMALIGNED [Enter] (or DAL) > snap leg's first Endpoint > snap second
+        Endpoint > pull the dimension line off the leg > click.
+     Do this for all 13 legs AND for AB (14 aligned dims total). They should read
+     245', 297', 293', 249', 300', 265', 500', 240', 281', 302', 287', 270', 190',
+     and AB ~215'-6".
+
+5.2  ANGULAR (azimuths) - layer DIM-ANG. For EACH station, dimension the angle from
+     its north line (straight up) to its outgoing leg:
+        Type: DIMANGULAR [Enter] (or DAN) > press [Enter] to get the "vertex" mode >
+          "Specify angle vertex:"  snap the station (Endpoint).
+          "First angle endpoint:"  with ORTHO on (F8), pick a point straight UP
+                                    (north) from the station.
+          "Second angle endpoint:" pick a point along the OUTGOING leg.
+          Drag the arc and click to place.
+     Pair each station with its azimuth: A=129, then 55, 23, 346, 300, 260, 275,
+     243, 156, 216, 131, 84, 110 (see the table in outline.txt Section 2).
+     REFLEX ANGLES (>180: 346,300,260,275,243,216): drag the arc to the OUTSIDE so
+     it shows the large (clockwise) value. If DIMANGULAR refuses to show >180, just
+     place a TEXT label with the number (e.g. "300 deg") on layer DIM-ANG instead -
+     the figure only needs the value shown.
+
+
+================================================================================
+PART 6 - DRAW FIGURE 11-3c, VERSION A   (place it clear of 11-4e)
+================================================================================
+6.1  Current layer = TRAVERSE. Pick a start point well to the LEFT or BELOW 11-4e
+     (a few thousand feet away) so the two figures don't overlap. This start point
+     is the "Start/End" station.
+6.2  11-3c has NO given lengths - we use Version A (pixel-measured) lengths with the
+     figure's azimuths. Enter as a polyline (F12 dynamic input OFF):
+        Type: PLINE [Enter] > click Start point, then:
+             @260'<34
+             @257'<72
+             @280'<126
+             @272'<102
+             @517'<256
+        Then type:  C  [Enter]  (Close)  -> the 6th leg auto-closes back to Start.
+     NOTE: because lengths are eyeballed, the figure won't close perfectly (~56 ft
+     gap). Using Close absorbs that gap into the last leg - that's fine here.
+     ZOOM > Extents to view; it should resemble Figure 11-3c.
+6.3  Add "Start" and "End" TEXT (height 120') at the start vertex, like the figure.
+
+
+================================================================================
+PART 7 - 11-3c ANNOTATIONS   (north arrows + AZIMUTH dims ONLY)
+================================================================================
+7.1  NORTH arrows - layer NORTH. INSERT/COPY the NARROW block on all 6 vertices
+     (rotation 0, straight up), as in Part 4.
+7.2  AZIMUTH dimensions ONLY (no linear dims on 11-3c, per the figure) - layer
+     DIM-ANG. Use the DIMANGULAR vertex method from step 5.2 at each of the 6
+     stations, pairing: 34, 72, 126, 102, 256, 286.
+     (256 and 286 are reflex >180 - drag the arc outside, or label as text.)
+
+
+================================================================================
+PART 8 - SAVE VERSION A
+================================================================================
+8.1  ZOOM > Extents. Do a quick visual check against both figures.
+8.2  Type: SAVEAS [Enter] > file type "AutoCAD 2018 Drawing (*.dwg)" (safe/compatible)
+     > filename:  Chandni_Project55_063026_A  > Save.
+
+
+================================================================================
+PART 9 - MAKE VERSION B  (swap only the 11-3c part; keep 11-4e)
+================================================================================
+9.1  Erase ONLY the 11-3c Version A content: window-select just the 11-3c traverse,
+     its 6 north arrows, its azimuth dims, and its Start/End text -> ERASE (E).
+     Leave all of 11-4e untouched.
+9.2  Draw 11-3c VERSION B in the same spot (your hand-measured values x100).
+     Current layer = TRAVERSE. PLINE from a Start point, then:
+             @231'<34
+             @205'<72
+             @247'<126
+             @238'<102
+             @444'<256      <-- ESTIMATED leg (your data was missing this one)
+        Then:  C  [Enter]  (Close, auto-draws the 6th ~362' leg).
+     *** The @444'<256 leg is an ESTIMATE. Your five measured values (2.31, 2.05,
+     2.47, 2.38, 3.62) mapped by size to five legs and left the long azimuth-256
+     leg unmeasured. Re-measure that leg on the printed figure if you can and use
+     (your inches x100)'; otherwise 444' keeps it proportional. ***
+9.3  Redo the 11-3c annotations for Version B (Part 7): 6 north arrows + the 6
+     azimuth dims (34,72,126,102,256,286) + Start/End text.
+9.4  SAVEAS > filename:  Chandni_Project55_063026_B  > Save.
+     (Optional: verify _A.dwg still exists unchanged - you did SaveAs, not Save,
+     so _A is preserved.)
+
+
+================================================================================
+PART 10 - FINAL QA CHECKLIST (both files)
+================================================================================
+  [ ] Units = Engineering, angle Decimal-deg, Clockwise ON, North base
+  [ ] 5 layers present and objects on the right layers
+  [ ] 11-4e: closed polyline, looks like Figure 11-4e
+  [ ] 11-4e: AB labeled (~215'-6", N42 E)
+  [ ] 11-4e: area text inside (~877,207 SQ FT)
+  [ ] 11-4e: north arrow at all 14 vertices; 13 leg dims + AB dim; azimuth dims
+  [ ] 11-3c: correct version drawn, closed; Start/End labeled
+  [ ] 11-3c: north arrow at all 6 vertices; azimuth dims only
+  [ ] File A saved as Chandni_Project55_063026_A.dwg (11-3c VerA + 11-4e)
+  [ ] File B saved as Chandni_Project55_063026_B.dwg (11-3c VerB + 11-4e)
+
+EXPECTED KEY NUMBERS (for checking your work):
+  - AB length  ~ 215.48 ft (215'-5.76")     - AB bearing ~ N 42 E (az 42)
+  - 11-4e area ~ 877,207 sq ft (~20.14 ac)  - raw AREA value ~126,317,900 sq in
+================================================================================
