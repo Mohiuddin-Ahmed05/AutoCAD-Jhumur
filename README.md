@@ -1,4 +1,4 @@
-# Project 55 - AutoCAD Closed-Traverse Assignment
+# Project 55 - [AutoCAD] Closed Traverse Assignment
 
 **Student:** Jhumur Chandni  
 **Software:** AutoCAD 2027  
