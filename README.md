@@ -1,6 +1,8 @@
 # Project 55 - AutoCAD Closed-Traverse Assignment
 
-**Student:** Jhumur Chandni  **Software:** AutoCAD 2027  **Save name:** `Chandni_Project55_06-30-2026.dwg`
+**Student:** Jhumur Chandni  
+**Software:** AutoCAD 2027  
+**Save name:** `Chandni_Project55_06-30-2026.dwg`
 
 Draw two closed traverses — **Figure 11-3c** and **Figure 11-4e** — set units, layers,
 dimensions, and north arrows; determine segment **AB** and the enclosed **area** of 11-4e.
