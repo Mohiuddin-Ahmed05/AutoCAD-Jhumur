@@ -1,4 +1,4 @@
-# AutoCAD Project 55 - Closed-Traverse Assignment
+# Project 55 - AutoCAD Closed-Traverse Assignment
 
 **Student:** Jhumur Chandni  **Software:** AutoCAD 2027  **Save name:** `Chandni_Project55_06-30-2026.dwg`
 
